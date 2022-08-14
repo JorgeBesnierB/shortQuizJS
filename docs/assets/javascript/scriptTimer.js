@@ -42,7 +42,7 @@ function setTime(){
                 //INDICATE USER THE TIMER HAS ENDED
                 timeEl.textContent = "Time Ended";
                 // Calls function to create and append image
-                sendMessage();
+                showSubmit();
             }
         }
         else{
