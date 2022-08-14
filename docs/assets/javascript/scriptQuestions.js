@@ -5,79 +5,106 @@ const quizQuestions = [
     a: "<js>",
     b: "<script>",
     c: "<scripting>",
-    r: "c"
+    r: "2"
   },
   {
     q: "What is the correct syntax for referring to an external script called xxx.js?",
     a: "<script src='xxx.js'>",
     b: "<script name='xxx.js'>",
     c: "<script href='xxx.js'>",
-    r: "a"
+    r: "0"
   },
   {
     q: "How do you write 'Hello World' in an alert box?",
     a: "msgBox('Hello World');",
     b: "alert('Hello World');",
     c: "alertBox('Hello World');",
-    r: "b"
+    r: "1"
   },
   {
     q: "How do you create a function in JavaScript?",
     a: "function = myFunction()",
     b: " function:myFunction()",
     c: "function myFunction()",
-    r: "c"
+    r: "2"
   },
   {
     q: "How do you call a function named 'myFunction'?",
     a: "myFunction()",
     b: "call myFunction()",
     c: "call function myFunction()",
-    r: "a"
+    r: "0"
   }
 ];
 
 
 //get dom elements to load the timer and quiz.
 const startBtn = document.getElementById('startQuiz'); //we are using a unique id
-const quizSec = document.getElementById('forms'); 
+
 
 //get dom elements to load the question.
-const quiz = document.getElementById("quiz");
-const answerEls = document.querySelectorAll(".answer");
-const question = document.getElementById("question");
-const a_text = document.getElementById("a_text");
-const b_text = document.getElementById("b_text");
-const c_text = document.getElementById("c_text");
-const d_text = document.getElementById("d_text");
-const submitBtn = document.getElementById("submit");
-const text = "";
-var a = document.createElement("a");
+const questionHeder = document.getElementById("questionHeder");
+const currentQuestion = document.getElementById("currentQuestion");
+const quizSec = document.getElementById('forms'); 
+const questionAns = document.querySelectorAll(".ans");
 
+//element for quiz options
+const a = document.getElementById("aL");
+const b = document.getElementById("bL");
+const c = document.getElementById("cL");
 
+const subBtn = document.getElementById("subBtn");
 
-function clearData(){
+var questionCounter = 0;
 
-}
-
+//Loads the next question to the dom
 function getQuestion(){
-
+  questionHeder.textContent = 'Question: ' + (questionCounter + 1) + ' of 5'
+  currentQuestion.textContent = quizQuestions[questionCounter].q;
+  a.textContent = quizQuestions[questionCounter].a;
+  b.textContent = quizQuestions[questionCounter].b;
+  c.textContent = quizQuestions[questionCounter].c;
+  let checkSelected = checkSelecteda();
+  console.log('aqui', checkSelected);
+  questionAns[checkSelected].checked = false;
 }
 
 function getAnswer(){
 
 }
 
-function checkSelected(){
-
+function checkSelecteda(){
+  console.log('entre');
+  for (let i = 0; i < questionAns.length; i++) {
+    if (questionAns[i].checked) {
+      return i; //answer is selected
+    }
+  }
+  return -1; //no answer is selecte and wont go to next question
 }
 
+
+//Changes the question
 document.getElementById("subBtn").onclick = function () {
-  console.log('load next question')
+  console.log(checkSelecteda());
+  if (checkSelecteda() !== -1){ //Verifies that the answer has been selected.
+    questionCounter++;
+    if (questionCounter< 5){
+      getQuestion();
+      if(questionCounter === 4){
+        subBtn.textContent = 'Finish'
+      }
+    }
+    else{
+      console.log('show score')
+    }
+  }
 };
 
+//Loads the fist question when the quiz is loaded
 document.getElementById("startQuiz").onclick = function () {
   startBtn.setAttribute('style', 'visibility: hidden')
   quizSec.setAttribute('style', 'visibility: ')
+  getQuestion();
   setTime();
 };

@@ -13,6 +13,7 @@ timeEl.textContent = minStart + ":" + secStart;
 
 //This function is called when the user clicks the start button for the quiz
 function setTime(){
+    console.log('timer')
     var timerInterval = setInterval(function() {
         timerValue--;
 

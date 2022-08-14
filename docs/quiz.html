@@ -41,20 +41,23 @@
 
     <section id="forms" style="visibility: hidden">
       <div class="container">
-        <h2>Question</h2>
-        <p>The form below contains three radio buttons. The last option is disabled:</p>
+        <h2 id="questionHeder"></h2>
+        <p id="currentQuestion"></p>
         
 
         
         <form>
           <div class="radio">
-            <label><input type="radio" name="ans" id="a" value="a">Option 1</label>
+            <input type="radio" name="ans" id="a" value="a" class="ans" checked>
+            <label id="aL">Option 1</label>
           </div>
           <div class="radio">
-            <label><input type="radio" name="ans" id="b" value="b">Option 2</label>
+            <input type="radio" name="ans" id="b" value="b" class="ans" >
+            <label id="bL">Option 2</label>
           </div>
           <div class="radio disabled">
-            <label><input type="radio" name="ans" id="c" value="c">Option 3</label>
+            <input type="radio" name="ans" id="c" value="c" class="ans" >
+            <label id="cL">Option 3</label>
           </div>
           <button id="subBtn" type="button" class="btn btn-primary btn-sm">Next Question</button>
         </form>
