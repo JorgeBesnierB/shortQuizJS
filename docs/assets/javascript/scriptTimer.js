@@ -2,7 +2,14 @@
 var timeEl = document.getElementById('timerDisplay'); //we are using a unique id
 
 //actual timer starting value
-var timerValue = 12; //this is equal to 5 minuts (1 min per question)
+var timerValue = 300; //this is equal to 5 minuts (1 min per question)
+//Get new time
+let minStart = String(parseInt(timerValue/60)); //show the minuts of initial timer updated
+let secStart = String(timerValue%60); //show the seconds of initial timer updated
+minStart = minStart < 10 ? "0" + minStart : minStart;
+secStart = secStart < 10 ? "0" + secStart : secStart;
+
+timeEl.textContent = minStart + ":" + secStart;
 
 //This function is called when the user clicks the start button for the quiz
 function setTime(){
@@ -39,6 +46,6 @@ function setTime(){
     }, 1000);
 }
 
-setTime();
+
 
 

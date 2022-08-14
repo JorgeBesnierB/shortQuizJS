@@ -1,0 +1,10 @@
+#homeTitle{
+    text-align: center;
+    width: 100%;
+    display: flex;
+}
+
+#divTest{
+    background-color: gray;
+    text-align: center;
+}

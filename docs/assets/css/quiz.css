@@ -37,3 +37,12 @@
     width: 100%;
     background-color: gray;
 }
+
+
+#submitBtn{
+    align-items: float-right;
+}
+
+#startQuiz{
+    margin: 2%;
+}
