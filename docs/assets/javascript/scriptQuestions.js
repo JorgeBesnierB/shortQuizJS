@@ -5,35 +5,35 @@ const quizQuestions = [
     a: "<js>",
     b: "<script>",
     c: "<scripting>",
-    r: "2"
+    r: 2
   },
   {
     q: "What is the correct syntax for referring to an external script called xxx.js?",
     a: "<script src='xxx.js'>",
     b: "<script name='xxx.js'>",
     c: "<script href='xxx.js'>",
-    r: "0"
+    r: 0
   },
   {
     q: "How do you write 'Hello World' in an alert box?",
     a: "msgBox('Hello World');",
     b: "alert('Hello World');",
     c: "alertBox('Hello World');",
-    r: "1"
+    r: 1
   },
   {
     q: "How do you create a function in JavaScript?",
     a: "function = myFunction()",
     b: " function:myFunction()",
     c: "function myFunction()",
-    r: "2"
+    r: 2
   },
   {
     q: "How do you call a function named 'myFunction'?",
     a: "myFunction()",
     b: "call myFunction()",
     c: "call function myFunction()",
-    r: "0"
+    r: 0
   }
 ];
 
@@ -53,9 +53,16 @@ const a = document.getElementById("aL");
 const b = document.getElementById("bL");
 const c = document.getElementById("cL");
 
+//buton to get the next question
 const subBtn = document.getElementById("subBtn");
 
+//counters
 var questionCounter = 0;
+var score = 0;
+
+const submitSection = document.getElementById("getName");
+const un = document.getElementById("titleScore");
+
 
 //Loads the next question to the dom
 function getQuestion(){
@@ -65,16 +72,10 @@ function getQuestion(){
   b.textContent = quizQuestions[questionCounter].b;
   c.textContent = quizQuestions[questionCounter].c;
   let checkSelected = checkSelecteda();
-  console.log('aqui', checkSelected);
   questionAns[checkSelected].checked = false;
 }
 
-function getAnswer(){
-
-}
-
 function checkSelecteda(){
-  console.log('entre');
   for (let i = 0; i < questionAns.length; i++) {
     if (questionAns[i].checked) {
       return i; //answer is selected
@@ -83,11 +84,21 @@ function checkSelecteda(){
   return -1; //no answer is selecte and wont go to next question
 }
 
+function showSubmit(){
+  quizSec.setAttribute('style', 'visibility: hidden')
+  submitSection.setAttribute('style', 'visibility: ')
+  un.textContent = 'YOUR SCORE WAS: ' + score;
+  timerValue = -1;
+  timeEl.textContent = "Finished";
+}
 
-//Changes the question
+//Main logic Changes the question
 document.getElementById("subBtn").onclick = function () {
-  console.log(checkSelecteda());
-  if (checkSelecteda() !== -1){ //Verifies that the answer has been selected.
+  let cs = checkSelecteda()
+  if (cs !== -1 && questionCounter < 5){ //Verifies that the answer has been selected.
+    if(cs === quizQuestions[questionCounter].r){
+      score++;
+    }
     questionCounter++;
     if (questionCounter< 5){
       getQuestion();
@@ -96,7 +107,7 @@ document.getElementById("subBtn").onclick = function () {
       }
     }
     else{
-      console.log('show score')
+      showSubmit()
     }
   }
 };

@@ -15,35 +15,42 @@ timeEl.textContent = minStart + ":" + secStart;
 function setTime(){
     console.log('timer')
     var timerInterval = setInterval(function() {
-        timerValue--;
+        if(timerValue>=0){
+            timerValue--;
+            //Get new time
+            let min = String(parseInt(timerValue/60)); //show the minuts of initial timer updated
+            let sec = String(timerValue%60); //show the seconds of initial timer updated
 
-        //Get new time
-        let min = String(parseInt(timerValue/60)); //show the minuts of initial timer updated
-        let sec = String(timerValue%60); //show the seconds of initial timer updated
+            //fomat new time as xx:yy
+            min = min < 10 ? "0" + min : min;
+            sec = sec < 10 ? "0" + sec : sec;
 
-        //fomat new time as xx:yy
-        min = min < 10 ? "0" + min : min;
-        sec = sec < 10 ? "0" + sec : sec;
+            //time is ruuning out with a visual queue
+            if (timerValue <= 10 && timerValue%2 === 0){
+                timeEl.setAttribute('style', 'background-color: red')
+            }
+            else{
+                timeEl.setAttribute('style', 'background-color: gray')
+            }
 
-        //time is ruuning out with a visual queue
-        if (timerValue <= 10 && timerValue%2 === 0){
-            timeEl.setAttribute('style', 'background-color: red')
+            //concat minus and seconds with time format using :
+            timeEl.textContent = min + ":" + sec;
+
+            if(timerValue === 0) {
+                // Stops execution of action at set interval
+                clearInterval(timerInterval);
+                //INDICATE USER THE TIMER HAS ENDED
+                timeEl.textContent = "Time Ended";
+                // Calls function to create and append image
+                sendMessage();
+            }
         }
         else{
-            timeEl.setAttribute('style', 'background-color: gray')
-        }
-
-        //concat minus and seconds with time format using :
-        timeEl.textContent = min + ":" + sec;
-
-        if(timerValue === 0) {
-            // Stops execution of action at set interval
             clearInterval(timerInterval);
-            //INDICATE USER THE TIMER HAS ENDED
-            timeEl.textContent = "Time Ended";
-            // Calls function to create and append image
-            sendMessage();
         }
+        
+
+
     }, 1000);
 }
 
