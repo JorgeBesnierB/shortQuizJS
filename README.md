@@ -21,3 +21,4 @@ WHEN the game is over
 THEN I can save my initials and score
 
 # Mock-Up
+![Alt text](docs/assets/webapis.gif "Optional title")
